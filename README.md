@@ -40,7 +40,6 @@ With options:
         "nextjs": "Next.js",
         "nestjs": "Nest.js"
       },
-      "checkLinkReference": true,
       "checkLinkTitle": true,
       "checkLinkText": true
     }
@@ -56,22 +55,19 @@ textlint --rule link-title-case README.md
 
 ## Options
 
-- `stopWords`: `string[]`
-  - Default: `[]`
-  - Additional words to treat as stop words (lowercase in titles unless first/last)
+- `checkLinkText`: `Boolean`
+  - Default: `true`
+  - Whether to check link display text (`[text](url)` or `[text][reference]`)
+- `checkLinkTitle`: `Boolean`
+  - Default: `true`
+  - Whether to check link titles (`[text](url "title")` or `[reference]: url "title"`)
 - `specialTerms`: `Object`
   - Default: `{}`
   - Special terms with custom capitalization (e.g., `{"nextjs": "Next.js"}`)
   - In addition of default special terms (see `src/ap-style.js` file)
-- `checkLinkReference`: `Boolean`
-  - Default: `true`
-  - Whether to check link references (`[text][reference]`)
-- `checkLinkTitle`: `Boolean`
-  - Default: `true`
-  - Whether to check link titles (`[text](url "title")` or `[reference]: url "title"`)
-- `checkLinkText`: `Boolean`
-  - Default: `true`
-  - Whether to check link display text (`[text](url)`)
+- `stopWords`: `string[]`
+  - Default: `[]`
+  - Additional words to treat as stop words (lowercase in titles unless first/last)
 
 ## Examples
 

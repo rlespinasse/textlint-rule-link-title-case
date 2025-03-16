@@ -7,7 +7,6 @@ const apStyleTitleCase = require('./ap-style');
  * @param {Object} options - Rule options
  * @param {string[]} [options.stopWords] - Additional words to treat as stop words
  * @param {Object} [options.specialTerms] - Special terms with custom capitalization
- * @param {boolean} [options.checkLinkReference=true] - Whether to check link reference
  * @param {boolean} [options.checkLinkTitle=true] - Whether to check link title
  * @param {boolean} [options.checkLinkText=true] - Whether to check link display text
  * @returns {import("@textlint/types").TextlintRuleModule} - The rule object
@@ -17,8 +16,7 @@ function reporter(context, options = {}) {
   const customStopWords = Array.isArray(options.stopWords) ? options.stopWords : [];
   const customSpecialTerms = typeof options.specialTerms === 'object' ? options.specialTerms : {};
 
-  // Default to checking link text, reference, and title unless explicitly disabled
-  const checkLinkReference = options.checkLinkReference !== false;
+  // Default to checking link text, and title unless explicitly disabled
   const checkLinkTitle = options.checkLinkTitle !== false;
   const checkLinkText = options.checkLinkText !== false;
 
@@ -142,7 +140,7 @@ function reporter(context, options = {}) {
 
     // Handle link references [text][reference]
     [Syntax.LinkReference](node) {
-      if (checkLinkReference) {
+      if (checkLinkText) {
         try {
           if (node.children && node.children.length > 0) {
             // Skip image link
