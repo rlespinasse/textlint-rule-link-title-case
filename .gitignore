@@ -33,3 +33,9 @@ npm-debug.log
 
 # Publish src/ instead lib/
 /lib
+
+### Custom part
+
+# generated tests
+e2e/source-fixed.md
+!expected-lint.log
