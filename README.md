@@ -95,6 +95,18 @@ textlint --rule link-title-case README.md
 [github-link]: https://github.com "GitHub Homepage"
 ```
 
+## Tips & tricks
+
+Use `textlint-filter-rule-comments` to disable terminology check for particular paragraphs:
+
+```markdown
+<!-- textlint-disable link-title-case -->
+
+[Click Here to Learn About JavaScript](https://example.com)
+
+<!-- textlint-enable -->
+```
+
 ## AP Style Title Case Rules
 
 This rule follows AP Style title case conventions:
