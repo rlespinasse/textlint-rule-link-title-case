@@ -821,3 +821,397 @@ tester.run("AP Style Title Case Rule on Both Link Text and Title", rule, {
     }
   ]
 });
+
+// Add these test cases to your existing test file
+
+tester.run("AP Style Title Case Rule with Custom Stop Words", rule, {
+  valid: [
+    {
+      text: '[The Theory amid Relativity](http://example.com)',
+      options: {
+        stopWords: ["amid"]
+      }
+    },
+    {
+      text: '[The Day amid the Night and Throughout](http://example.com)',
+      options: {
+        stopWords: ["amid", "throughout"]
+      }
+    },
+    {
+      text: '[Learning beyond Books](http://example.com "Reading amid Internet")',
+      options: {
+        stopWords: ["amid", "beyond"]
+      }
+    }
+  ],
+  invalid: [
+    {
+      text: '[The Theory Amid Relativity](http://example.com)',
+      output: '[The Theory amid Relativity](http://example.com)',
+      options: {
+        stopWords: ["amid"]
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "The Theory amid Relativity"'
+        }
+      ]
+    },
+    {
+      text: '[The Day Amid The Night And Throughout](http://example.com)',
+      output: '[The Day amid the Night and Throughout](http://example.com)',
+      options: {
+        stopWords: ["amid", "throughout"]
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "The Day amid the Night and Throughout"'
+        }
+      ]
+    },
+    {
+      text: '[Learning Beyond Books](http://example.com "Reading Amid Internet")',
+      output: '[Learning beyond Books](http://example.com "Reading amid Internet")',
+      options: {
+        stopWords: ["amid", "beyond"]
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "Learning beyond Books", and Link title should follow AP style: "Reading amid Internet"'
+        }
+      ]
+    }
+  ]
+});
+
+tester.run("AP Style Title Case Rule with Custom Special Terms", rule, {
+  valid: [
+    {
+      text: '[Introduction to Svelte.js Framework](http://example.com)',
+      options: {
+        specialTerms: {
+          "sveltejs": "Svelte.js"
+        }
+      }
+    },
+    {
+      text: '[Working With Deno and Remix.run](http://example.com)',
+      options: {
+        specialTerms: {
+          "deno": "Deno",
+          "remixrun": "Remix.run"
+        }
+      }
+    },
+    {
+      text: '[Link](http://example.com "Using Vercel and Netlify")',
+      options: {
+        specialTerms: {
+          "vercel": "Vercel",
+          "netlify": "Netlify"
+        }
+      }
+    }
+  ],
+  invalid: [
+    {
+      text: '[Introduction to Sveltejs Framework](http://example.com)',
+      output: '[Introduction to Svelte.js Framework](http://example.com)',
+      options: {
+        specialTerms: {
+          "sveltejs": "Svelte.js"
+        }
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "Introduction to Svelte.js Framework"'
+        }
+      ]
+    },
+    {
+      text: '[Working with deno and remixrun](http://example.com)',
+      output: '[Working With Deno and Remix.run](http://example.com)',
+      options: {
+        specialTerms: {
+          "deno": "Deno",
+          "remixrun": "Remix.run"
+        }
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "Working With Deno and Remix.run"'
+        }
+      ]
+    },
+    {
+      text: '[Link](http://example.com "Using vercel and netlify")',
+      output: '[Link](http://example.com "Using Vercel and Netlify")',
+      options: {
+        specialTerms: {
+          "vercel": "Vercel",
+          "netlify": "Netlify"
+        }
+      },
+      errors: [
+        {
+          message: 'Link title should follow AP style: "Using Vercel and Netlify"'
+        }
+      ]
+    },
+    {
+      text: '[Introduction to Sveltejs and deno](http://example.com "Using vercel and netlify")',
+      output: '[Introduction to Svelte.js and Deno](http://example.com "Using Vercel and Netlify")',
+      options: {
+        specialTerms: {
+          "sveltejs": "Svelte.js",
+          "deno": "Deno",
+          "vercel": "Vercel",
+          "netlify": "Netlify"
+        }
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "Introduction to Svelte.js and Deno", and Link title should follow AP style: "Using Vercel and Netlify"'
+        }
+      ]
+    }
+  ]
+});
+
+tester.run("AP Style Title Case Rule with Component Toggle Options", rule, {
+  valid: [
+    // Only check link text, not title
+    {
+      text: '[The Comprehensive Guide](http://example.com "the comprehensive guide")',
+      options: {
+        checkLinkText: true,
+        checkLinkTitle: false
+      }
+    },
+    // Only check link title, not text
+    {
+      text: '[the comprehensive guide](http://example.com "The Comprehensive Guide")',
+      options: {
+        checkLinkText: false,
+        checkLinkTitle: true
+      }
+    },
+    // Only check link reference, not definition title
+    {
+      text: `[The Comprehensive Guide][link]
+
+[link]: http://example.com "the comprehensive guide"`,
+      options: {
+        checkLinkText: true,
+        checkLinkTitle: false
+      }
+    },
+    // Disable all checks (everything should be valid)
+    {
+      text: '[the comprehensive guide](http://example.com "the comprehensive guide")',
+      options: {
+        checkLinkText: false,
+        checkLinkTitle: false
+      }
+    }
+  ],
+  invalid: [
+    // Only check link text, not title
+    {
+      text: '[the comprehensive guide](http://example.com "the comprehensive guide")',
+      output: '[The Comprehensive Guide](http://example.com "the comprehensive guide")',
+      options: {
+        checkLinkText: true,
+        checkLinkTitle: false
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "The Comprehensive Guide"'
+        }
+      ]
+    },
+    // Only check link title, not text
+    {
+      text: '[the comprehensive guide](http://example.com "the comprehensive guide")',
+      output: '[the comprehensive guide](http://example.com "The Comprehensive Guide")',
+      options: {
+        checkLinkText: false,
+        checkLinkTitle: true
+      },
+      errors: [
+        {
+          message: 'Link title should follow AP style: "The Comprehensive Guide"'
+        }
+      ]
+    },
+    // Only check link reference, not definition title
+    {
+      text: `[the comprehensive guide][link]
+
+[link]: http://example.com "the comprehensive guide"`,
+      output: `[The Comprehensive Guide][link]
+
+[link]: http://example.com "the comprehensive guide"`,
+      options: {
+        checkLinkText: true,
+        checkLinkTitle: false
+      },
+      errors: [
+        {
+          message: 'Link reference text should follow AP style: "The Comprehensive Guide"'
+        }
+      ]
+    }
+  ]
+});
+
+tester.run("AP Style Title Case Rule with Combined Configuration Options", rule, {
+  valid: [
+    // Combine special terms and stop words
+    {
+      text: '[Learning amid Svelte.js](http://example.com)',
+      options: {
+        stopWords: ["amid"],
+        specialTerms: {
+          "sveltejs": "Svelte.js"
+        }
+      }
+    },
+    // Combine special terms and component toggles
+    {
+      text: '[Introduction to Sveltejs](http://example.com "Using Svelte.js")',
+      options: {
+        checkLinkText: false,
+        checkLinkTitle: true,
+        specialTerms: {
+          "sveltejs": "Svelte.js"
+        }
+      }
+    },
+    // Combine all options
+    {
+      text: '[Learning beyond Svelte.js amid Tutorials](http://example.com "the quick guide to vercel")',
+      options: {
+        checkLinkText: true,
+        checkLinkTitle: false,
+        stopWords: ["beyond", "amid"],
+        specialTerms: {
+          "sveltejs": "Svelte.js",
+          "vercel": "Vercel"
+        }
+      }
+    }
+  ],
+  invalid: [
+    // Combine special terms and stop words
+    {
+      text: '[Learning Amid Sveltejs](http://example.com)',
+      output: '[Learning amid Svelte.js](http://example.com)',
+      options: {
+        stopWords: ["amid"],
+        specialTerms: {
+          "sveltejs": "Svelte.js"
+        }
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "Learning amid Svelte.js"'
+        }
+      ]
+    },
+    // Combine special terms and component toggles
+    {
+      text: '[Introduction to Sveltejs](http://example.com "Using Sveltejs")',
+      output: '[Introduction to Sveltejs](http://example.com "Using Svelte.js")',
+      options: {
+        checkLinkText: false,
+        checkLinkTitle: true,
+        specialTerms: {
+          "sveltejs": "Svelte.js"
+        }
+      },
+      errors: [
+        {
+          message: 'Link title should follow AP style: "Using Svelte.js"'
+        }
+      ]
+    },
+    // Combine all options
+    {
+      text: '[Learning Beyond Sveltejs Amid Tutorials](http://example.com "the quick guide to vercel")',
+      output: '[Learning beyond Svelte.js amid Tutorials](http://example.com "the quick guide to vercel")',
+      options: {
+        checkLinkText: true,
+        checkLinkTitle: false,
+        stopWords: ["beyond", "amid"],
+        specialTerms: {
+          "sveltejs": "Svelte.js",
+          "vercel": "Vercel"
+        }
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "Learning beyond Svelte.js amid Tutorials"'
+        }
+      ]
+    }
+  ]
+});
+
+// Test case for overriding default special terms
+tester.run("AP Style Title Case Rule with Overridden Special Terms", rule, {
+  valid: [
+    {
+      text: '[Working With CustomTerm and AnotherTerm](http://example.com)',
+      options: {
+        specialTerms: {
+          "customterm": "CustomTerm",
+          "anotherterm": "AnotherTerm",
+          // Override a default term with different capitalization
+          "javascript": "Javascript"
+        }
+      }
+    }
+  ],
+  invalid: [
+    {
+      text: '[Working with customterm and javascript](http://example.com)',
+      output: '[Working With CustomTerm and Javascript](http://example.com)',
+      options: {
+        specialTerms: {
+          "customterm": "CustomTerm",
+          // Override a default term with different capitalization
+          "javascript": "Javascript"
+        }
+      },
+      errors: [
+        {
+          message: 'Link text should follow AP style: "Working With CustomTerm and Javascript"'
+        }
+      ]
+    }
+  ]
+});
+
+// Test case for empty options that should use defaults
+tester.run("AP Style Title Case Rule with Empty Options", rule, {
+  valid: [
+    {
+      text: '[Working With JavaScript and React.js](http://example.com)',
+      options: {}
+    }
+  ],
+  invalid: [
+    {
+      text: '[Working with javascript and reactjs](http://example.com)',
+      output: '[Working With JavaScript and React.js](http://example.com)',
+      options: {},
+      errors: [
+        {
+          message: 'Link text should follow AP style: "Working With JavaScript and React.js"'
+        }
+      ]
+    }
+  ]
+});

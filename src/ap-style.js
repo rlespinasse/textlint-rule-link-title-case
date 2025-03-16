@@ -45,11 +45,11 @@ function apStyleTitleCase(title, customStopWords = [], customSpecialTerms = {}) 
     }
 
     // It's a word - apply title case rules
-    if (wordCount === 0 || wordCount === totalWords - 1 || part.length >= 4 || capitalizeNext) {
+    if (wordCount === 0 || wordCount === totalWords - 1 || capitalizeNext) {
       // First or last word or after certain punctuation - always capitalize
       processedParts.push(capitalizeWord(part, customSpecialTerms));
       capitalizeNext = false;
-    } else if (stopWords.includes(part.toLowerCase()) && part.length <= 3) {
+    } else if (stopWords.includes(part.toLowerCase())) {
       // Stop word in the middle - lowercase
       processedParts.push(part.toLowerCase());
     } else if (part.toLowerCase() === 'to') {
