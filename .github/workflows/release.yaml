@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  workflow_run:
+    workflows: ["validate"]
+    branches: [main]
+    types:
+      - completed
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - "main"
+    paths:
+      - ".github/workflows/release.yaml"
+
+permissions:
+  contents: write
+  issues: write
+  id-token: write
+  packages: write
+
+concurrency:
+  group: release-${{ github.ref }}
+
+jobs:
+  run:
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: taiki-e/install-action@just
+
+      - name: Setup Project
+        run: just setup
+
+      - name: Release it
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: just release-it

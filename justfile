@@ -82,6 +82,14 @@ security-audit:
     @echo "Running security audit..."
     npm run audit
 
+# ===== Release Commands =====
+
+# Run semantic release process
+[group('Release')]
+release-it:
+    @echo "Run semantic release process..."
+    npx semantic-release
+
 # ===== Debug Commands =====
 
 # Open the markdown AST explorer for debugging
