@@ -10,7 +10,7 @@ function apStyleTitleCase(title, customStopWords = [], customSpecialTerms = {}) 
 
   // Words that should remain lowercase (unless they're first or last)
   const defaultStopWords = [
-    'a', 'an', 'and', 'at', 'but', 'by', 'for', 'in',
+    'a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'in',
     'nor', 'of', 'on', 'or', 'so', 'the', 'to', 'up', 'yet'
   ];
 
