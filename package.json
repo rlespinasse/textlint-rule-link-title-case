@@ -38,6 +38,7 @@
     "type": "git",
     "url": "https://github.com/rlespinasse/textlint-rule-link-title-case.git"
   },
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   }
