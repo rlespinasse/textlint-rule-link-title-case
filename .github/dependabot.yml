@@ -9,8 +9,6 @@ updates:
       dependencies:
         patterns:
           - '*'
-    reviewers:
-      - 'rlespinasse'
     labels: []
   - package-ecosystem: 'github-actions'
     directory: '/'
@@ -20,6 +18,4 @@ updates:
       dependencies:
         patterns:
           - '*'
-    reviewers:
-      - 'rlespinasse'
     labels: []
