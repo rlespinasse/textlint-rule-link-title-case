@@ -415,6 +415,9 @@ tester.run("AP Style Title Case Rule on Link Text", rule, {
     '[![some image](image.png)](http://example.com)',
     // Links with angle brackets should be ignored
     '<http://example.com>',
+    // Corner cases
+    '[Awesome-Lint as a GitHub Action](http://example.com)',
+    'Manage Labels on GitHub (Create/Rename/Update/Delete) As Code](http://example.com)',
   ],
   invalid: [
     // All lowercase
