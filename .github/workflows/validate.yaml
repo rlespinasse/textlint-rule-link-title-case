@@ -22,7 +22,8 @@ jobs:
           # https://nodejs.org/en/about/previous-releases#release-schedule
           - 20
           - 22
-          - 23
+          - 24
+          - 25
 
     runs-on: ${{ matrix.os }}
     name: Using Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
