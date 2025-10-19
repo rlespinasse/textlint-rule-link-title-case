@@ -6,7 +6,7 @@ source.md
   13:2   ✓ error  Link reference text should follow AP style: "Some Link Using Reference"                                                   index
   17:30  ✓ error  Link definition title should follow AP style: "Some Title of a Definition Link"                                           index
 
-✖ 5 problems (5 errors, 0 warnings)
+✖ 5 problems (5 errors, 0 warnings, 0 infos)
 ✓ 5 fixable problems.
 Try to run: $ textlint --fix [file]
 
