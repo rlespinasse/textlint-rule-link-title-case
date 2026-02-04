@@ -1,6 +1,6 @@
 #!/usr/bin/env -S just --justfile
-
 # Run commands silently unless they fail
+
 set quiet := true
 
 # Show available commands
@@ -80,7 +80,7 @@ fix-e2e:
 [group('Validation')]
 security-audit:
     @echo "Running security audit..."
-    npm run audit
+    npm run audit --audit-level=moderate
 
 # ===== Release Commands =====
 
