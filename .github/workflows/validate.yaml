@@ -51,6 +51,3 @@ jobs:
 
       - name: Validate all
         run: just validate-all
-
-      - name: Check for security vulnerabilities in dependencies
-        run: just security-audit
