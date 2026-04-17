@@ -44,7 +44,7 @@ jobs:
           # Active LTS
           node-version: 24
 
-      - uses: taiki-e/install-action@a164de717a0ee9284c2d9db1c6016a4c339cd333 # v2.69.14
+      - uses: taiki-e/install-action@7a4939c09608b2a1986b484eca1d16fd0db8ebef # v2.75.5
         with:
           tool: just
 
