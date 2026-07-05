@@ -9,4 +9,3 @@ source.md
 ✖ 5 problems (5 errors, 0 warnings, 0 infos)
 ✓ 5 fixable problems.
 Try to run: $ textlint --fix [file]
-
