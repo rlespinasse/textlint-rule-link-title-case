@@ -28,8 +28,8 @@
     "serialize-javascript": "^7.1.0"
   },
   "devDependencies": {
-    "@textlint/types": "^15.6.1",
-    "textlint": "^15.7.1",
+    "@textlint/types": "^15.8.0",
+    "textlint": "^15.8.0",
     "textlint-scripts": "^15.7.1",
     "textlint-tester": "^15.2.1"
   },
