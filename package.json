@@ -30,7 +30,7 @@
   "devDependencies": {
     "@textlint/types": "^15.8.0",
     "textlint": "^16.0.0",
-    "textlint-scripts": "^15.7.1",
+    "textlint-scripts": "^16.1.1",
     "textlint-tester": "^16.0.0"
   },
   "repository": {
