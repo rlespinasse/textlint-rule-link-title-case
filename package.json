@@ -28,7 +28,7 @@
     "serialize-javascript": "^7.1.0"
   },
   "devDependencies": {
-    "@textlint/types": "^15.8.0",
+    "@textlint/types": "^16.1.2",
     "textlint": "^16.1.2",
     "textlint-scripts": "^16.1.2",
     "textlint-tester": "^16.0.0"
